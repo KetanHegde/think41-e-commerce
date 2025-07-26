@@ -3,14 +3,9 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 
 class Message(BaseModel):
-    sender: str            # "user" or "ai"
+    sender: str         # "user" or "ai"
     message: str
     timestamp: datetime
-
-class ConversationCreate(BaseModel):
-    user_id: str
-    session_id: str
-    messages: List[Message] = Field(default_factory=list)
 
 class MessageCreate(BaseModel):
     sender: str
@@ -18,6 +13,15 @@ class MessageCreate(BaseModel):
 
 class ConversationResponse(BaseModel):
     user_id: str
-    session_id: str
+    conversation_id: str
     created_at: datetime
     messages: List[Message]
+
+class ChatRequest(BaseModel):
+    user_id: str
+    message: str
+    conversation_id: Optional[str] = None
+
+class ChatResponse(BaseModel):
+    conversation_id: str
+    messages: List[dict]
