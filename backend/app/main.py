@@ -162,6 +162,7 @@ def extract_product_id(messages) -> Optional[int]:
                 continue
     return None
 
+
 def extract_user_id(messages) -> Optional[int]:
     for msg in reversed(messages):
         m = re.search(r"user id[:\-\s=]*([0-9]+)", msg.get("content", ""), re.IGNORECASE)
