@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from typing import List, Optional
+from fastapi.middleware.cors import CORSMiddleware
 from .models import MessageCreate, ConversationResponse, Message, ChatRequest, ChatResponse
 from .crud import (
     create_conversation,
@@ -16,6 +17,14 @@ from .llm_agent import run_llm
 import re
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["http://localhost:3000"] for stricter setup
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 SYSTEM_PROMPT = (
     "You are a helpful e-commerce assistant. "
