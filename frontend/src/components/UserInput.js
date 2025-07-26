@@ -1,27 +1,43 @@
-import  { useState } from "react";
+import { useState } from "react";
 
-function UserInput({ onSend }) {
+export default function UserInput({ onSend }) {
   const [val, setVal] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (val.trim() === "") return;
-    onSend(val);
-    setVal("");
+    if (val.trim() !== "") {
+      onSend(val.trim());
+      setVal("");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{display: "flex"}}>
+    <form onSubmit={handleSubmit} style={{ display: "flex" }}>
       <input
         type="text"
         value={val}
-        onChange={e => setVal(e.target.value)}
-        placeholder="Type your message..."
-        style={{flex: 1, padding: 12, borderRadius: 8, border: "1px solid #ccc"}}
+        onChange={(e) => setVal(e.target.value)}
+        placeholder="Type your message…"
+        style={{
+          flex: 1,
+          padding: 12,
+          borderRadius: 8,
+          border: "1px solid #ccc",
+        }}
       />
-      <button type="submit" style={{marginLeft: 8, padding: "0 20px"}}>Send</button>
+      <button
+        type="submit"
+        style={{
+          marginLeft: 8,
+          padding: "0 20px",
+          borderRadius: 8,
+          border: "none",
+          background: "#0084ff",
+          color: "#fff",
+        }}
+      >
+        Send
+      </button>
     </form>
   );
 }
-
-export default UserInput;

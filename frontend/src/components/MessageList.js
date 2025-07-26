@@ -1,6 +1,6 @@
 import Message from "./Message";
 
-function MessageList({ messages }) {
+export default function MessageList({ messages }) {
   return (
     <div>
       {messages.map((msg, idx) => (
@@ -9,5 +9,3 @@ function MessageList({ messages }) {
     </div>
   );
 }
-
-export default MessageList;
